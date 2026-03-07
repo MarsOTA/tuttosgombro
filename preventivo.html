@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Preventivo Guidato | TuttoSgombro</title>
+    <meta name="description" content="Wizard preventivo TuttoSgombro: inserisci indirizzo, materiali, quantità, carica foto e ottieni una stima AI immediata." />
+    <link rel="canonical" href="https://tuttosgombro.it/preventivo" />
+    <link rel="stylesheet" href="/styles.css" />
+    <script src="https://unpkg.com/lucide@latest" defer></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container nav-wrap">
+        <a href="/" class="brand"><span><strong>Tutto</strong>Sgombro</span></a>
+        <a class="btn btn-small" href="/">Torna alla home</a>
+      </div>
+    </header>
+
+    <main class="container">
+      <section id="wizard">
+        <h1>Richiesta guidata preventivo</h1>
+        <p class="section-subtitle">Pagina dedicata al wizard con caricamento foto incluso.</p>
+
+        <form id="quote-form" class="card" novalidate>
+          <div class="steps-indicator" aria-hidden="true"><span class="step-dot active">1</span><span class="step-dot">2</span><span class="step-dot">3</span><span class="step-dot">4</span><span class="step-dot">5</span></div>
+
+          <section class="wizard-step active" data-step="1">
+            <h3>Dati cliente</h3>
+            <div class="grid two-col">
+              <label>Nome e Cognome <input required name="fullName" autocomplete="name" /></label>
+              <label>Telefono <input required type="tel" name="phone" autocomplete="tel" /></label>
+              <label class="full">Email <input required type="email" name="email" autocomplete="email" /></label>
+            </div>
+          </section>
+
+          <section class="wizard-step" data-step="2">
+            <h3>Indirizzo intervento</h3>
+            <label>Indirizzo completo <input required id="address" name="address" list="address-suggestions" placeholder="Via, numero, città" /><datalist id="address-suggestions"></datalist></label>
+            <p class="hint" id="address-hint">Google Places se presente chiave valida; fallback automatico OpenStreetMap.</p>
+          </section>
+
+          <section class="wizard-step" data-step="3">
+            <h3>Locale e materiali</h3>
+            <div class="grid two-col">
+              <label>Tipologia locale
+                <select required name="locationType" id="locationType">
+                  <option value="">Seleziona...</option><option value="cantina">Cantina</option><option value="garage">Garage/Box</option><option value="appartamento">Appartamento</option><option value="ufficio">Ufficio</option><option value="negozio">Negozio</option><option value="capannone">Capannone</option>
+                </select>
+              </label>
+              <label>Quantità materiale
+                <select required name="quantityLevel" id="quantityLevel"><option value="">Seleziona...</option></select>
+              </label>
+            </div>
+            <fieldset>
+              <legend>Materiali</legend>
+              <div class="chips">
+                <label><input type="checkbox" name="materials" value="mobili" /> Mobili</label><label><input type="checkbox" name="materials" value="elettrodomestici" /> Elettrodomestici</label><label><input type="checkbox" name="materials" value="raee" /> RAEE</label><label><input type="checkbox" name="materials" value="ferro" /> Ferro</label><label><input type="checkbox" name="materials" value="legno" /> Legno</label><label><input type="checkbox" name="materials" value="ingombranti" /> Ingombranti</label><label><input type="checkbox" name="materials" value="archivio" /> Archivio</label><label><input type="checkbox" name="materials" value="macerie" /> Macerie leggere</label>
+              </div>
+            </fieldset>
+          </section>
+
+          <section class="wizard-step" data-step="4">
+            <h3>Dettagli logistici</h3>
+            <div class="grid two-col">
+              <label>Piano
+                <select name="floor" required><option value="0">Piano terra</option><option value="1">1° piano</option><option value="2">2° piano</option><option value="3">3°+ piano</option></select>
+              </label>
+              <label>Ascensore
+                <select name="lift" required><option value="yes">Sì</option><option value="no">No</option></select>
+              </label>
+            </div>
+            <label>Note utili <textarea name="notes" rows="3"></textarea></label>
+          </section>
+
+          <section class="wizard-step" data-step="5">
+            <h3>Carica foto (fondamentale)</h3>
+            <label>Foto locali/ingombri
+              <input type="file" id="photos" name="photos" accept="image/*" multiple required />
+            </label>
+            <div id="photo-preview" class="preview-grid"></div>
+            <p class="hint">Puoi caricare più foto. Servono per un preventivo più accurato.</p>
+          </section>
+
+          <div class="wizard-actions">
+            <button type="button" id="prev-step" class="btn btn-ghost dark hidden">Indietro</button>
+            <button type="button" id="next-step" class="btn">Avanti</button>
+            <button class="btn hidden" id="submit-btn" type="submit">Calcola preventivo AI</button>
+          </div>
+          <p id="form-error" class="error" aria-live="polite"></p>
+        </form>
+        <article id="result" class="card result hidden" aria-live="polite"></article>
+      </section>
+    </main>
+
+    <footer class="footer"><div class="container"><p>© <span id="year"></span> TuttoSgombro</p></div></footer>
+    <script src="/wizard.js" defer></script>
+  </body>
+</html>

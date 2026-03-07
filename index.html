@@ -3,223 +3,68 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>TuttoSgombro | Wizard preventivo sgombero con stima AI</title>
-    <meta
-      name="description"
-      content="TuttoSgombro: sgomberi professionali per privati e aziende. Wizard preventivo guidato con stima AI immediata, interventi reali prima/dopo e assistenza rapida."
-    />
+    <title>TuttoSgombro | Sgomberi professionali con preventivo guidato</title>
+    <meta name="description" content="Sgomberi professionali per privati e aziende. Richiedi il preventivo guidato in una pagina dedicata con upload foto e stima AI." />
     <meta name="robots" content="index,follow,max-image-preview:large" />
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="TuttoSgombro | Wizard preventivo sgombero con stima AI" />
-    <meta
-      property="og:description"
-      content="Compila il wizard guidato: indirizzo, locale, materiali e quantità. Ottieni subito una fascia di costo stimata dall'AI."
-    />
-    <meta property="og:url" content="https://tuttosgombro.it/" />
-    <meta property="og:locale" content="it_IT" />
     <link rel="canonical" href="https://tuttosgombro.it/" />
-    <link rel="preload" href="./styles.css" as="style" />
-    <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="/styles.css" />
     <script src="https://unpkg.com/lucide@latest" defer></script>
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "LocalBusiness",
-        "name": "TuttoSgombro",
-        "description": "Sgombero professionale con wizard preventivo guidato e stima AI.",
-        "url": "https://tuttosgombro.it/",
-        "telephone": "+39 02 0000 0000",
-        "areaServed": "Italia",
-        "priceRange": "€€"
-      }
-    </script>
   </head>
   <body>
     <header class="site-header">
       <div class="container nav-wrap">
-        <a href="#" class="brand" aria-label="TuttoSgombro Home">
+        <a href="/" class="brand" aria-label="TuttoSgombro Home">
           <svg class="logo" viewBox="0 0 64 64" role="img" aria-label="Logo TuttoSgombro">
-            <defs>
-              <linearGradient id="bolt" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0%" stop-color="#ffe35a" />
-                <stop offset="100%" stop-color="#ffbe0b" />
-              </linearGradient>
-            </defs>
+            <defs><linearGradient id="bolt" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#ffe35a" /><stop offset="100%" stop-color="#ffbe0b" /></linearGradient></defs>
             <rect x="0" y="0" width="64" height="64" rx="14" fill="#081020" />
             <path d="M46 14H26l8 12H19l-5 10h15l-8 14h20l5-10H31z" fill="url(#bolt)" />
           </svg>
           <span><strong>Tutto</strong>Sgombro</span>
         </a>
-        <a class="btn btn-small" href="#wizard">Richiesta guidata preventivo</a>
+        <a class="btn btn-small" href="/preventivo">Richiesta guidata preventivo</a>
       </div>
     </header>
 
     <main>
-      <section class="hero">
-        <div class="hero-overlay"></div>
-        <div class="container hero-inner">
-          <div>
-            <p class="eyebrow">Sgombero professionale privati e aziende</p>
-            <h1>Wizard preventivo con AI: prezzo stimato in 2 minuti</h1>
-            <p>
-              Inserisci indirizzo, materiali e volume reale da sgomberare. Il nostro modello stima costi,
-              tempi e complessità in modo trasparente.
-            </p>
-            <div class="hero-cta">
-              <a class="btn" href="#wizard"><i data-lucide="sparkles"></i> Avvia wizard preventivo</a>
-              <a class="btn btn-ghost" href="tel:+390200000000"><i data-lucide="phone-call"></i> Chiama ora</a>
-            </div>
-            <ul class="trust">
-              <li><i data-lucide="badge-check"></i> Interventi verificati</li>
-              <li><i data-lucide="clock-3"></i> Uscita anche in 24/48h</li>
-              <li><i data-lucide="recycle"></i> Smaltimento certificato</li>
-            </ul>
+      <section class="hero-bento container">
+        <article class="bento bento-main">
+          <p class="eyebrow">Sgombero professionale privati e aziende</p>
+          <h1>Hero in stile bento: più chiarezza, più conversioni</h1>
+          <p>Interveniamo su case, uffici, negozi, cantine e capannoni. Organizzazione rapida, smaltimento certificato, prezzo trasparente.</p>
+          <div class="hero-cta">
+            <a class="btn" href="/preventivo"><i data-lucide="sparkles"></i> Avvia wizard preventivo</a>
+            <a class="btn btn-ghost dark" href="tel:+390200000000"><i data-lucide="phone-call"></i> Chiama ora</a>
           </div>
-          <aside class="hero-card glass">
-            <h2>Perché funziona meglio?</h2>
-            <p><i data-lucide="brain-circuit"></i> Algoritmo preventivo basato su casi reali</p>
-            <p><i data-lucide="truck"></i> Logistica locale e tempi ottimizzati</p>
-            <p><i data-lucide="shield-check"></i> Squadra assicurata e tracciamento materiali</p>
-          </aside>
-        </div>
-      </section>
-
-      <section class="container" id="wizard">
-        <h2>Richiesta guidata preventivo</h2>
-        <p class="section-subtitle">Wizard in 4 step: più veloce da compilare, più preciso nel risultato.</p>
-
-        <form id="quote-form" class="card" novalidate>
-          <div class="steps-indicator" aria-hidden="true">
-            <span class="step-dot active">1</span>
-            <span class="step-dot">2</span>
-            <span class="step-dot">3</span>
-            <span class="step-dot">4</span>
-          </div>
-
-          <section class="wizard-step active" data-step="1">
-            <h3>Dati cliente</h3>
-            <div class="grid two-col">
-              <label>Nome e Cognome <input required name="fullName" autocomplete="name" /></label>
-              <label>Telefono <input required type="tel" name="phone" autocomplete="tel" /></label>
-              <label class="full">Email <input required type="email" name="email" autocomplete="email" /></label>
-            </div>
-          </section>
-
-          <section class="wizard-step" data-step="2">
-            <h3>Indirizzo intervento</h3>
-            <label>
-              Indirizzo completo
-              <input required id="address" name="address" list="address-suggestions" placeholder="Via, numero, città" />
-              <datalist id="address-suggestions"></datalist>
-            </label>
-            <p class="hint" id="address-hint">
-              Autocomplete attivo con fallback libero (senza Google API key). Se imposti una chiave valida, usa Google Places.
-            </p>
-          </section>
-
-          <section class="wizard-step" data-step="3">
-            <h3>Locale e materiali</h3>
-            <div class="grid two-col">
-              <label>
-                Tipologia locale
-                <select required name="locationType" id="locationType">
-                  <option value="">Seleziona...</option>
-                  <option value="cantina">Cantina</option>
-                  <option value="garage">Garage/Box</option>
-                  <option value="appartamento">Appartamento</option>
-                  <option value="ufficio">Ufficio</option>
-                  <option value="negozio">Negozio</option>
-                  <option value="capannone">Capannone</option>
-                </select>
-              </label>
-              <label>
-                Quantità materiale
-                <select required name="quantityLevel" id="quantityLevel">
-                  <option value="">Seleziona...</option>
-                </select>
-              </label>
-            </div>
-
-            <fieldset>
-              <legend>Materiale da sgomberare (multi-selezione)</legend>
-              <div class="chips">
-                <label><input type="checkbox" name="materials" value="mobili" /> Mobili</label>
-                <label><input type="checkbox" name="materials" value="elettrodomestici" /> Elettrodomestici</label>
-                <label><input type="checkbox" name="materials" value="raee" /> RAEE</label>
-                <label><input type="checkbox" name="materials" value="ferro" /> Ferro/Metallo</label>
-                <label><input type="checkbox" name="materials" value="legno" /> Legno</label>
-                <label><input type="checkbox" name="materials" value="ingombranti" /> Ingombranti misti</label>
-                <label><input type="checkbox" name="materials" value="archivio" /> Carta/Archivio</label>
-                <label><input type="checkbox" name="materials" value="macerie" /> Macerie leggere</label>
-              </div>
-            </fieldset>
-          </section>
-
-          <section class="wizard-step" data-step="4">
-            <h3>Dettagli logistici</h3>
-            <div class="grid two-col">
-              <label>
-                Piano
-                <select name="floor" required>
-                  <option value="0">Piano terra</option>
-                  <option value="1">1° piano</option>
-                  <option value="2">2° piano</option>
-                  <option value="3">3° piano o superiore</option>
-                </select>
-              </label>
-              <label>
-                Ascensore disponibile?
-                <select name="lift" required>
-                  <option value="yes">Sì</option>
-                  <option value="no">No</option>
-                </select>
-              </label>
-            </div>
-            <label>
-              Note utili
-              <textarea name="notes" rows="3" placeholder="es. accesso ZTL, urgenza, scale strette..."></textarea>
-            </label>
-          </section>
-
-          <div class="wizard-actions">
-            <button type="button" id="prev-step" class="btn btn-ghost hidden">Indietro</button>
-            <button type="button" id="next-step" class="btn">Avanti</button>
-            <button class="btn hidden" id="submit-btn" type="submit">Calcola preventivo AI</button>
-          </div>
-          <p id="form-error" class="error" aria-live="polite"></p>
-        </form>
-
-        <article id="result" class="card result hidden" aria-live="polite"></article>
+        </article>
+        <article class="bento"><h3><i data-lucide="clock-3"></i> 24/48h</h3><p>Uscite rapide in tutta la provincia.</p></article>
+        <article class="bento"><h3><i data-lucide="shield-check"></i> Tracciato</h3><p>Filiera autorizzata per lo smaltimento.</p></article>
+        <article class="bento"><h3><i data-lucide="brain-circuit"></i> Stima AI</h3><p>Preventivo immediato con dati reali.</p></article>
+        <article class="bento bento-photo"><img src="/assets/prima-cantina.svg" alt="Intervento reale prima dello sgombero" loading="lazy" /></article>
       </section>
 
       <section class="container examples">
-        <h2>Prima / Dopo da interventi reali</h2>
+        <h2>Interventi prima / dopo</h2>
         <div class="cards-3">
           <article class="card mini">
-            <img src="./assets/prima-cantina.svg" alt="Prima dello sgombero di una cantina piena" loading="lazy" />
-            <img src="./assets/dopo-cantina.svg" alt="Dopo lo sgombero della stessa cantina" loading="lazy" />
-            <p>Cantina in zona Lambrate: 1 furgone pieno rimosso, pulizia finale inclusa.</p>
+            <img src="/assets/prima-cantina.svg" alt="Prima sgombero cantina" loading="lazy" />
+            <img src="/assets/dopo-cantina.svg" alt="Dopo sgombero cantina" loading="lazy" />
+            <p>Cantina piena liberata in giornata.</p>
           </article>
           <article class="card mini">
-            <img src="./assets/prima-ufficio.svg" alt="Prima dello sgombero di un ufficio dismesso" loading="lazy" />
-            <img src="./assets/dopo-ufficio.svg" alt="Dopo lo sgombero dell'ufficio" loading="lazy" />
-            <p>Ufficio dismesso: RAEE separati e archivio conferito in filiera autorizzata.</p>
+            <img src="/assets/prima-ufficio.svg" alt="Prima sgombero ufficio" loading="lazy" />
+            <img src="/assets/dopo-ufficio.svg" alt="Dopo sgombero ufficio" loading="lazy" />
+            <p>Ufficio dismesso ripristinato in 48h.</p>
           </article>
           <article class="card mini">
-            <img src="./assets/prima-garage.svg" alt="Prima dello sgombero di un garage saturo" loading="lazy" />
-            <img src="./assets/dopo-garage.svg" alt="Dopo lo sgombero del garage" loading="lazy" />
-            <p>Garage saturo: recupero spazio completo e area pronta all'uso in giornata.</p>
+            <img src="/assets/prima-garage.svg" alt="Prima sgombero garage" loading="lazy" />
+            <img src="/assets/dopo-garage.svg" alt="Dopo sgombero garage" loading="lazy" />
+            <p>Garage saturo, spazio recuperato al 100%.</p>
           </article>
         </div>
       </section>
     </main>
 
-    <footer class="footer">
-      <div class="container">
-        <p>© <span id="year"></span> TuttoSgombro — Sgomberi professionali per privati e aziende.</p>
-      </div>
-    </footer>
-
-    <script src="./script.js" defer></script>
+    <footer class="footer"><div class="container"><p>© <span id="year"></span> TuttoSgombro</p></div></footer>
+    <script src="/script.js" defer></script>
   </body>
 </html>
