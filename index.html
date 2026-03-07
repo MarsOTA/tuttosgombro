@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>TuttoSgombro | Sgomberi rapidi con preventivo guidato AI</title>
+    <meta
+      name="description"
+      content="TuttoSgombro: sgomberi professionali per privati e aziende. Richiesta guidata preventivo con calcolo AI, valutazione immediata, servizio rapido e certificato in tutta Italia."
+    />
+    <meta
+      name="keywords"
+      content="sgombero, sgomberi professionali, preventivo sgombero, sgombero casa, sgombero ufficio, TuttoSgombro"
+    />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="TuttoSgombro | Sgomberi rapidi con preventivo guidato AI" />
+    <meta
+      property="og:description"
+      content="Richiedi un preventivo sgombero completo con stima AI: inserisci locale, materiali, quantità e indirizzo con Google API."
+    />
+    <meta property="og:url" content="https://tuttosgombro.it/" />
+    <meta property="og:locale" content="it_IT" />
+    <link rel="canonical" href="https://tuttosgombro.it/" />
+    <link rel="preload" href="./styles.css" as="style" />
+    <link rel="stylesheet" href="./styles.css" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "TuttoSgombro",
+        "description": "Sgombero professionale per privati e aziende con preventivo guidato AI.",
+        "url": "https://tuttosgombro.it/",
+        "telephone": "+39 02 0000 0000",
+        "areaServed": "Italia",
+        "priceRange": "€€",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Milano",
+          "addressCountry": "IT"
+        },
+        "openingHours": "Mo-Sa 07:00-21:00"
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Quanto costa uno sgombero completo?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Dipende da volume, materiale, piano e distanza. Con la richiesta guidata AI ricevi subito una fascia di prezzo realistica."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "In quanto tempo intervenite?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Nella maggior parte dei casi entro 24-48 ore dalla conferma, anche con urgenza in giornata su molte zone."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Smaltite anche rifiuti speciali?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Gestiamo raccolta e smaltimento tramite filiera autorizzata per legno, metallo, RAEE e materiali non pericolosi."
+            }
+          }
+        ]
+      }
+    </script>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container nav-wrap">
+        <a href="#" class="brand" aria-label="TuttoSgombro Home">
+          <svg class="logo" viewBox="0 0 64 64" role="img" aria-label="Logo TuttoSgombro">
+            <defs>
+              <linearGradient id="bolt" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#ffd200" />
+                <stop offset="100%" stop-color="#ffb300" />
+              </linearGradient>
+            </defs>
+            <rect x="0" y="0" width="64" height="64" rx="14" fill="#0b1320" />
+            <path d="M46 14H26l8 12H19l-5 10h15l-8 14h20l5-10H31z" fill="url(#bolt)" />
+          </svg>
+          <span><strong>Tutto</strong>Sgombro</span>
+        </a>
+        <a class="btn btn-small" href="#preventivo">Richiesta guidata preventivo</a>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero container">
+        <div>
+          <p class="eyebrow">Sgombero professionale privati e aziende</p>
+          <h1>Sgomberi veloci e puliti, con preventivo AI immediato</h1>
+          <p>
+            Dal monolocale al capannone: valutiamo volume, materiali, accessibilità e distanza in modo
+            intelligente. Ricevi una stima dettagliata in meno di 2 minuti.
+          </p>
+          <div class="hero-cta">
+            <a class="btn" href="#preventivo">Richiesta guidata preventivo</a>
+            <a class="btn btn-ghost" href="tel:+390200000000">Chiama ora</a>
+          </div>
+          <ul class="trust">
+            <li>✅ Preventivo trasparente</li>
+            <li>✅ Intervento 24/48h</li>
+            <li>✅ Smaltimento autorizzato</li>
+          </ul>
+        </div>
+        <aside class="hero-card">
+          <h2>Perché TuttoSgombro?</h2>
+          <p>
+            Team specializzato, mezzi dedicati, logistica ottimizzata e algoritmo AI proprietario per stimare
+            costi e tempi reali.
+          </p>
+          <p><strong>+2.800</strong> sgomberi completati</p>
+          <p><strong>4.9/5</strong> media recensioni clienti</p>
+        </aside>
+      </section>
+
+      <section class="container" id="preventivo">
+        <h2>Richiesta guidata preventivo</h2>
+        <p class="section-subtitle">
+          Compila i dati: l'AI calcola subito una fascia di prezzo con breakdown e livello di confidenza.
+        </p>
+        <form id="quote-form" class="card" novalidate>
+          <div class="grid two-col">
+            <label>
+              Nome e Cognome
+              <input required name="fullName" autocomplete="name" />
+            </label>
+            <label>
+              Telefono
+              <input required type="tel" name="phone" autocomplete="tel" />
+            </label>
+            <label>
+              Email
+              <input required type="email" name="email" autocomplete="email" />
+            </label>
+            <label>
+              Indirizzo intervento (Google Places API)
+              <input
+                required
+                id="address"
+                name="address"
+                placeholder="Inizia a scrivere via/piazza..."
+                autocomplete="street-address"
+              />
+            </label>
+
+            <label>
+              Tipologia locale
+              <select required name="locationType" id="locationType">
+                <option value="">Seleziona...</option>
+                <option value="cantina">Cantina</option>
+                <option value="garage">Garage/Box</option>
+                <option value="appartamento">Appartamento</option>
+                <option value="ufficio">Ufficio</option>
+                <option value="negozio">Negozio</option>
+                <option value="capannone">Capannone</option>
+              </select>
+            </label>
+
+            <label>
+              Quantità materiale
+              <select required name="quantityLevel" id="quantityLevel">
+                <option value="">Seleziona...</option>
+              </select>
+            </label>
+          </div>
+
+          <fieldset>
+            <legend>Materiale da sgomberare (selezione multipla)</legend>
+            <div class="chips" id="materials-wrap">
+              <label><input type="checkbox" name="materials" value="mobili" /> Mobili</label>
+              <label><input type="checkbox" name="materials" value="elettrodomestici" /> Elettrodomestici</label>
+              <label><input type="checkbox" name="materials" value="raee" /> RAEE</label>
+              <label><input type="checkbox" name="materials" value="ferro" /> Ferro/Metallo</label>
+              <label><input type="checkbox" name="materials" value="legno" /> Legno</label>
+              <label><input type="checkbox" name="materials" value="ingombranti" /> Ingombranti misti</label>
+              <label><input type="checkbox" name="materials" value="archivio" /> Carta/Archivio</label>
+              <label><input type="checkbox" name="materials" value="macerie" /> Macerie leggere</label>
+            </div>
+          </fieldset>
+
+          <div class="grid two-col">
+            <label>
+              Piano
+              <select name="floor" required>
+                <option value="0">Piano terra</option>
+                <option value="1">1° piano</option>
+                <option value="2">2° piano</option>
+                <option value="3">3° piano o superiore</option>
+              </select>
+            </label>
+            <label>
+              Ascensore disponibile?
+              <select name="lift" required>
+                <option value="yes">Sì</option>
+                <option value="no">No</option>
+              </select>
+            </label>
+          </div>
+
+          <label>
+            Note utili
+            <textarea name="notes" rows="3" placeholder="es. accesso in ZTL, cortile interno, urgenza..."></textarea>
+          </label>
+
+          <button class="btn" type="submit">Calcola preventivo AI</button>
+          <p id="form-error" class="error" aria-live="polite"></p>
+        </form>
+
+        <article id="result" class="card result hidden" aria-live="polite"></article>
+      </section>
+
+      <section class="container examples">
+        <h2>Esempi realistici prima/dopo</h2>
+        <div class="cards-3">
+          <article class="card mini">
+            <h3>Appartamento ereditato (Milano)</h3>
+            <p><strong>Prima:</strong> 65 mq pieni di mobili datati, elettrodomestici fuori uso e archivio cartaceo.</p>
+            <p><strong>Dopo:</strong> sgombero in 1 giornata, locali liberi e pronti per ristrutturazione.</p>
+          </article>
+          <article class="card mini">
+            <h3>Ufficio in dismissione</h3>
+            <p><strong>Prima:</strong> 120 postazioni, server obsoleti, armadi metallici e 2 tonnellate di carta.</p>
+            <p><strong>Dopo:</strong> smaltimento tracciato + recupero materiali in 48 ore.</p>
+          </article>
+          <article class="card mini">
+            <h3>Garage saturo</h3>
+            <p><strong>Prima:</strong> vecchie scaffalature, legno, biciclette rotte, materassi e ferraglia.</p>
+            <p><strong>Dopo:</strong> spazio recuperato al 100% e pulizia finale inclusa.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="container seo-block">
+        <h2>Sgombero professionale in tutta Italia</h2>
+        <p>
+          Operiamo con squadre locali per ridurre tempi e costi. Siamo specializzati in sgombero case,
+          appartamenti, uffici, negozi, capannoni, cantine e garage con gestione trasparente dei materiali.
+          Ogni intervento include valutazione logistica, manodopera specializzata e conferimento autorizzato.
+        </p>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>© <span id="year"></span> TuttoSgombro — Sgomberi professionali per privati e aziende.</p>
+      </div>
+    </footer>
+
+    <script src="./script.js" defer></script>
+    <script>
+      window.initGoogleAddress = function initGoogleAddress() {
+        if (!window.google || !google.maps || !google.maps.places) return;
+        const input = document.getElementById('address');
+        new google.maps.places.Autocomplete(input, { componentRestrictions: { country: 'it' } });
+      };
+    </script>
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_API_KEY&libraries=places&callback=initGoogleAddress"
+      defer
+    ></script>
+  </body>
+</html>
