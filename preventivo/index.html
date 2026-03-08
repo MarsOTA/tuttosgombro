@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Preventivo Online | TuttoSgombro</title>
+    <meta name="description" content="Prenotazione sgombero online con selezione articoli, prezzo garantito, foto e riepilogo ordine in tempo reale." />
+    <link rel="canonical" href="https://tuttosgombro.it/preventivo" />
+    <link rel="stylesheet" href="/styles.css" />
+    <script src="https://unpkg.com/lucide@latest" defer></script>
+  </head>
+  <body class="booking-body">
+    <header class="top-utility">
+      <div class="container utility-wrap">
+        <span><i data-lucide="phone"></i> Chiama 02 0000 0000</span>
+        <span><i data-lucide="camera"></i> Invia foto WhatsApp</span>
+      </div>
+    </header>
+
+    <header class="site-header">
+      <div class="container nav-wrap">
+        <a href="/" class="brand" aria-label="TuttoSgombro Home">
+          <svg class="logo" viewBox="0 0 64 64" role="img" aria-label="Logo TuttoSgombro">
+            <defs><linearGradient id="bolt" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#ffe35a" /><stop offset="100%" stop-color="#ffbe0b" /></linearGradient></defs>
+            <rect x="0" y="0" width="64" height="64" rx="14" fill="#081020" />
+            <path d="M46 14H26l8 12H19l-5 10h15l-8 14h20l5-10H31z" fill="url(#bolt)" />
+          </svg>
+          <span><strong>Tutto</strong>Sgombro</span>
+        </a>
+        <a class="btn btn-small" href="/">Torna alla home</a>
+      </div>
+    </header>
+
+    <main class="container booking-page">
+      <section class="booking-trust card">
+        <p><i data-lucide="zap"></i> Prenotazione istantanea</p>
+        <p><i data-lucide="badge-euro"></i> Prezzo garantito</p>
+        <p><i data-lucide="star"></i> Recensioni verificate</p>
+      </section>
+
+      <section class="booking-grid">
+        <article class="card booking-main">
+          <h1><i data-lucide="package-search"></i> Seleziona gli articoli da sgomberare</h1>
+          <p class="section-subtitle">Scegli gli elementi più comuni. Puoi aggiungere quantità e inserire voci personalizzate.</p>
+
+          <div id="item-grid" class="item-grid"></div>
+
+          <label class="custom-item-label">Non vedi il tuo articolo?
+            <input type="text" id="custom-item" placeholder="Es. pianoforte, vecchie librerie, attrezzatura officina" />
+          </label>
+
+          <div class="selected-list-wrap">
+            <h3>Articoli selezionati</h3>
+            <div id="selected-list" class="selected-list"></div>
+          </div>
+
+          <hr />
+
+          <form id="quote-form" class="booking-form" novalidate>
+            <h2>Dati per il preventivo definitivo</h2>
+            <div class="grid two-col">
+              <label>Nome e cognome <input required name="fullName" autocomplete="name" /></label>
+              <label>Telefono <input required type="tel" name="phone" autocomplete="tel" /></label>
+              <label class="full">Email <input required type="email" name="email" autocomplete="email" /></label>
+              <label class="full">Indirizzo intervento
+                <input required id="address" name="address" list="address-suggestions" placeholder="Via, numero, città" />
+                <datalist id="address-suggestions"></datalist>
+              </label>
+              <label>
+                Tipologia locale
+                <select required name="locationType" id="locationType">
+                  <option value="">Seleziona...</option>
+                  <option value="cantina">Cantina</option>
+                  <option value="garage">Garage/Box</option>
+                  <option value="appartamento">Appartamento</option>
+                  <option value="ufficio">Ufficio</option>
+                  <option value="negozio">Negozio</option>
+                  <option value="capannone">Capannone</option>
+                </select>
+              </label>
+              <label>
+                Quantità complessiva
+                <select required name="quantityLevel" id="quantityLevel"><option value="">Seleziona...</option></select>
+              </label>
+              <label>
+                Piano
+                <select name="floor" required><option value="0">Piano terra</option><option value="1">1° piano</option><option value="2">2° piano</option><option value="3">3°+ piano</option></select>
+              </label>
+              <label>
+                Ascensore
+                <select name="lift" required><option value="yes">Sì</option><option value="no">No</option></select>
+              </label>
+            </div>
+
+            <label>Carica foto locali/ingombri
+              <input type="file" id="photos" name="photos" accept="image/*" multiple required />
+            </label>
+            <div id="photo-preview" class="preview-grid"></div>
+
+            <label>Note utili <textarea name="notes" rows="3" placeholder="Urgenza, ZTL, cortile interno, ecc."></textarea></label>
+
+            <p id="address-hint" class="hint">Google Places se disponibile; fallback automatico OpenStreetMap.</p>
+            <p id="form-error" class="error" aria-live="polite"></p>
+            <button class="btn" type="submit">Blocca preventivo</button>
+          </form>
+        </article>
+
+        <aside class="card summary-card" id="summary-card">
+          <h2>Riepilogo ordine</h2>
+          <div class="summary-price">
+            <span>Prezzo garantito*</span>
+            <strong id="summary-total">€0</strong>
+          </div>
+
+          <div class="promo-row">
+            <input id="promo-code" placeholder="Codice promo" />
+            <button id="apply-promo" type="button" class="btn btn-promo">APPLICA</button>
+          </div>
+
+          <button type="button" id="toggle-breakdown" class="btn btn-ghost dark full-btn">Vedi breakdown prezzo</button>
+          <div id="breakdown" class="breakdown hidden"></div>
+
+          <button type="button" class="btn btn-ghost dark full-btn">Salva questo preventivo</button>
+          <p class="summary-note">*Prezzo preliminare AI, confermato da operatore con verifica foto e accesso.</p>
+          <article id="result" class="result hidden" aria-live="polite"></article>
+        </aside>
+      </section>
+    </main>
+
+    <footer class="footer"><div class="container"><p>© <span id="year"></span> TuttoSgombro</p></div></footer>
+    <script src="/wizard.js" defer></script>
+  </body>
+</html>

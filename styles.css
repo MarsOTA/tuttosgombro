@@ -1,0 +1,89 @@
+:root { --bg:#f7f9fc; --ink:#0f1728; --muted:#4a5a77; --brand:#0b1320; --line:#dbe3f0; --card:#fff; --accent:#9fd26a; }
+* { box-sizing:border-box; }
+body { margin:0; font-family:Inter,system-ui,sans-serif; color:var(--ink); background:var(--bg); }
+.container { width:min(1120px,92vw); margin-inline:auto; }
+.site-header { position:sticky; top:0; z-index:30; background:rgba(247,249,252,.94); border-bottom:1px solid var(--line); backdrop-filter:blur(8px); }
+.nav-wrap { display:flex; justify-content:space-between; align-items:center; padding:.7rem 0; }
+.brand { display:inline-flex; align-items:center; gap:.6rem; color:var(--ink); text-decoration:none; }
+.logo { width:40px; height:40px; }
+
+.top-utility { background:#1e1e1e; color:#fff; font-size:.92rem; }
+.utility-wrap { display:flex; gap:1.2rem; padding:.45rem 0; }
+.utility-wrap span { display:inline-flex; align-items:center; gap:.35rem; }
+
+.hero-bento { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:.9rem; padding:1.5rem 0 1rem; }
+.bento { background:var(--card); border:1px solid var(--line); border-radius:16px; padding:1rem; box-shadow:0 10px 30px rgba(12,20,35,.05); }
+.bento-main { grid-column:span 2; background:linear-gradient(145deg,#0c1b35,#1f4d8f); color:#fff; }
+.bento-main p { color:#d7e7ff; }
+.bento-photo { padding:0; overflow:hidden; }
+.bento-photo img { width:100%; height:100%; object-fit:cover; display:block; }
+.eyebrow { font-size:.82rem; text-transform:uppercase; letter-spacing:.02em; font-weight:700; color:#b9d4ff; }
+h1 { font-size:clamp(1.7rem,3vw,2.4rem); margin:.5rem 0 .8rem; line-height:1.2; }
+h2 { font-size:clamp(1.35rem,2.2vw,1.8rem); }
+h3 { margin:.2rem 0 .6rem; display:flex; gap:.4rem; align-items:center; }
+.hero-cta { display:flex; gap:.6rem; flex-wrap:wrap; margin-top:1rem; }
+.btn { border:0; background:var(--brand); color:#fff; border-radius:10px; padding:.74rem 1rem; font-weight:700; text-decoration:none; display:inline-flex; align-items:center; justify-content:center; gap:.4rem; cursor:pointer; }
+.btn-small { padding:.45rem .8rem; font-size:.9rem; }
+.btn-ghost { background:transparent; border:1px solid currentColor; }
+.btn-ghost.dark { color:var(--ink); }
+.btn-promo { background:var(--accent); color:#1c2a12; }
+.full-btn { width:100%; margin-top:.55rem; }
+.bento-main .btn-ghost { color:#fff; }
+
+.card { background:var(--card); border:1px solid var(--line); border-radius:14px; padding:1rem; box-shadow:0 10px 25px rgba(12,20,35,.05); }
+.examples { padding:.6rem 0 2rem; }
+.cards-3 { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:.9rem; }
+.mini img { width:100%; border-radius:10px; border:1px solid #d3deef; margin-bottom:.45rem; }
+
+.booking-body { background:#eef1f5; }
+.booking-page { padding:1.2rem 0 2rem; }
+.booking-trust { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); margin-bottom:.9rem; }
+.booking-trust p { display:flex; align-items:center; justify-content:center; gap:.4rem; margin:.3rem 0; font-weight:600; color:#28515d; }
+.booking-grid { display:grid; grid-template-columns:minmax(0,1.6fr) minmax(280px,.8fr); gap:1rem; align-items:start; }
+.booking-main h1 { font-size:clamp(1.45rem,2vw,1.9rem); margin-top:0; }
+.section-subtitle { color:var(--muted); margin-top:-.2rem; }
+.item-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:.6rem; margin:.8rem 0; }
+.item-tile { border:1px solid #d7e1eb; border-radius:10px; background:#fff; min-height:112px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:.25rem; font-weight:700; color:#2f3f57; cursor:pointer; }
+.item-tile small { color:#7a8da7; font-weight:600; }
+.item-tile:hover { border-color:#96cf5f; box-shadow:0 0 0 2px rgba(150,207,95,.2) inset; }
+.custom-item-label { display:block; margin-top:.3rem; }
+.selected-list-wrap { margin-top:.8rem; }
+.selected-list { display:grid; gap:.45rem; }
+.selected-row { display:grid; grid-template-columns:1fr auto auto; gap:.5rem; align-items:center; border:1px solid #d8e2ef; border-radius:10px; padding:.45rem .6rem; }
+.qty-wrap { display:flex; align-items:center; gap:.4rem; }
+.qty-wrap button { border:1px solid #bfd1e6; background:#fff; border-radius:6px; width:28px; height:28px; cursor:pointer; }
+.muted { color:#7b8ca7; }
+.booking-form { margin-top:1rem; }
+.grid { display:grid; gap:.85rem; }
+.two-col { grid-template-columns:repeat(2,minmax(0,1fr)); }
+.full { grid-column:1 / -1; }
+label { display:flex; flex-direction:column; gap:.35rem; font-weight:600; }
+input,select,textarea { min-height:42px; border:1px solid #c8d4e7; border-radius:10px; padding:.55rem; font:inherit; background:#fff; }
+textarea { resize:vertical; }
+.preview-grid { margin-top:.7rem; display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:.5rem; }
+.preview-grid img { width:100%; border-radius:8px; border:1px solid #d1def0; aspect-ratio:1/1; object-fit:cover; }
+.hint { color:#48608a; font-size:.92rem; }
+.error { color:#b00020; }
+.result { margin-top:1rem; }
+.hidden { display:none; }
+
+.summary-card { position:sticky; top:84px; }
+.summary-price { background:#eef8e4; border:1px solid #c9e0ac; border-radius:10px; padding:.8rem; display:flex; justify-content:space-between; align-items:center; margin-bottom:.7rem; }
+.summary-price strong { font-size:1.6rem; color:#1f3e13; }
+.promo-row { display:grid; grid-template-columns:1fr auto; gap:.5rem; margin-bottom:.6rem; }
+.breakdown { padding:.7rem; border:1px solid #d6e1ef; border-radius:10px; background:#f7fbff; }
+.summary-note { color:#6d809b; font-size:.9rem; }
+
+.footer { border-top:1px solid var(--line); color:#55698d; padding:1rem 0 1.4rem; margin-top:1.2rem; }
+
+@media (max-width: 1020px) {
+  .item-grid { grid-template-columns:repeat(3,minmax(0,1fr)); }
+}
+@media (max-width: 920px) {
+  .hero-bento, .cards-3, .two-col, .booking-grid, .booking-trust { grid-template-columns:1fr; }
+  .bento-main { grid-column:span 1; }
+  .preview-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .summary-card { position:static; }
+  .item-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .utility-wrap { flex-direction:column; gap:.3rem; }
+}
