@@ -1,32 +1,101 @@
+const catalog = [
+  { id: 'materasso', label: 'Materasso', icon: 'bed-single', price: 35 },
+  { id: 'divano', label: 'Divano', icon: 'sofa', price: 80 },
+  { id: 'armadio', label: 'Armadio', icon: 'cabinet', price: 95 },
+  { id: 'frigo', label: 'Frigorifero', icon: 'refrigerator', price: 55 },
+  { id: 'lavatrice', label: 'Lavatrice', icon: 'washing-machine', price: 45 },
+  { id: 'scrivania', label: 'Scrivania', icon: 'desk', price: 40 },
+  { id: 'tv', label: 'TV/RAEE', icon: 'tv', price: 30 },
+  { id: 'tapis', label: 'Tapis Roulant', icon: 'dumbbell', price: 65 }
+];
+
 const quantityByLocation = {
-  cantina: ['Piccola (fino a 8 m³)', 'Media (9-16 m³)', 'Grande (oltre 16 m³)'],
-  garage: ['Parziale (fino a 10 m³)', 'Quasi pieno (11-20 m³)', 'Pieno (oltre 20 m³)'],
-  appartamento: ['Poche stanze (fino a 20 m³)', 'Metà casa (21-40 m³)', 'Casa completa (oltre 40 m³)'],
-  ufficio: ['Piccolo ufficio (fino a 15 m³)', 'Piano operativo (16-35 m³)', 'Sede completa (oltre 35 m³)'],
-  negozio: ['Corner (fino a 12 m³)', 'Locale medio (13-28 m³)', 'Locale grande (oltre 28 m³)'],
-  capannone: ['Area ridotta (fino a 30 m³)', 'Area ampia (31-70 m³)', 'Area estesa (oltre 70 m³)']
+  cantina: ['Bassa', 'Media', 'Alta'],
+  garage: ['Bassa', 'Media', 'Alta'],
+  appartamento: ['1 stanza', '2-3 stanze', 'Casa intera'],
+  ufficio: ['Piccolo', 'Medio', 'Grande'],
+  negozio: ['Piccolo', 'Medio', 'Grande'],
+  capannone: ['Ridotto', 'Ampio', 'Molto ampio']
 };
 
-const basePrice = { cantina: 160, garage: 240, appartamento: 450, ufficio: 520, negozio: 420, capannone: 900 };
-const materialFactor = { mobili: 1.12, elettrodomestici: 1.22, raee: 1.18, ferro: 1.1, legno: 1.06, ingombranti: 1.2, archivio: 1.08, macerie: 1.3 };
+const locationFactor = { cantina: 1, garage: 1.1, appartamento: 1.35, ufficio: 1.4, negozio: 1.3, capannone: 1.8 };
 const quantityFactor = [1, 1.35, 1.75];
 const floorFactor = [1, 1.08, 1.16, 1.25];
 
-const form = document.getElementById('quote-form');
-const result = document.getElementById('result');
-const formError = document.getElementById('form-error');
+const selections = new Map();
+let promoMultiplier = 1;
+
+const itemGrid = document.getElementById('item-grid');
+const selectedList = document.getElementById('selected-list');
+const summaryTotal = document.getElementById('summary-total');
+const breakdown = document.getElementById('breakdown');
+const quoteForm = document.getElementById('quote-form');
 const locationSelect = document.getElementById('locationType');
 const quantitySelect = document.getElementById('quantityLevel');
-const prevButton = document.getElementById('prev-step');
-const nextButton = document.getElementById('next-step');
-const submitButton = document.getElementById('submit-btn');
-const steps = [...document.querySelectorAll('.wizard-step')];
-const dots = [...document.querySelectorAll('.step-dot')];
 const photosInput = document.getElementById('photos');
 const photoPreview = document.getElementById('photo-preview');
+const formError = document.getElementById('form-error');
+const result = document.getElementById('result');
 
-let currentStep = 1;
 document.getElementById('year').textContent = new Date().getFullYear();
+
+function euro(value) {
+  return `€${Math.round(value)}`;
+}
+
+function renderCatalog() {
+  itemGrid.innerHTML = '';
+  catalog.forEach((item) => {
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'item-tile';
+    button.innerHTML = `<i data-lucide="${item.icon}"></i><span>${item.label}</span><small>${euro(item.price)}</small>`;
+    button.addEventListener('click', () => {
+      const current = selections.get(item.id) || { ...item, qty: 0 };
+      current.qty += 1;
+      selections.set(item.id, current);
+      renderSelected();
+      updateSummary();
+    });
+    itemGrid.appendChild(button);
+  });
+}
+
+function renderSelected() {
+  if (!selections.size) {
+    selectedList.innerHTML = '<p class="muted">Nessun articolo selezionato.</p>';
+    return;
+  }
+
+  selectedList.innerHTML = '';
+  [...selections.values()].forEach((item) => {
+    const row = document.createElement('div');
+    row.className = 'selected-row';
+    row.innerHTML = `
+      <span>${item.label}</span>
+      <div class="qty-wrap">
+        <button type="button" data-act="minus">−</button>
+        <strong>${item.qty}</strong>
+        <button type="button" data-act="plus">+</button>
+      </div>
+      <span>${euro(item.qty * item.price)}</span>
+    `;
+    row.querySelector('[data-act="minus"]').addEventListener('click', () => {
+      item.qty -= 1;
+      if (item.qty <= 0) selections.delete(item.id);
+      else selections.set(item.id, item);
+      renderSelected();
+      updateSummary();
+    });
+    row.querySelector('[data-act="plus"]').addEventListener('click', () => {
+      item.qty += 1;
+      selections.set(item.id, item);
+      renderSelected();
+      updateSummary();
+    });
+    selectedList.appendChild(row);
+  });
+}
 
 function refreshQuantityOptions() {
   const selected = locationSelect.value;
@@ -37,37 +106,65 @@ function refreshQuantityOptions() {
     option.textContent = label;
     quantitySelect.appendChild(option);
   });
+  updateSummary();
 }
 
-function renderStep() {
-  steps.forEach((step) => step.classList.toggle('active', Number(step.dataset.step) === currentStep));
-  dots.forEach((dot, i) => dot.classList.toggle('active', i + 1 <= currentStep));
-  prevButton.classList.toggle('hidden', currentStep === 1);
-  nextButton.classList.toggle('hidden', currentStep === steps.length);
-  submitButton.classList.toggle('hidden', currentStep !== steps.length);
+function getBaseItemsPrice() {
+  return [...selections.values()].reduce((sum, item) => sum + item.price * item.qty, 0);
 }
 
-function validateCurrentStep() {
-  const activeStep = steps.find((step) => Number(step.dataset.step) === currentStep);
-  const requiredFields = [...activeStep.querySelectorAll('[required]')];
-  const isValid = requiredFields.every((field) => field.checkValidity());
-  formError.textContent = isValid ? '' : 'Completa i campi obbligatori di questo step.';
-  return isValid;
+function calculateTotal() {
+  const location = locationSelect.value;
+  const qIdx = Number(quantitySelect.value || 0);
+  const floor = Number(quoteForm.elements.floor?.value || 0);
+  const lift = quoteForm.elements.lift?.value;
+
+  let total = getBaseItemsPrice();
+  if (!total) return 0;
+
+  total *= (locationFactor[location] || 1);
+  total *= (quantityFactor[qIdx] || 1);
+  total *= (floorFactor[floor] || 1);
+  if (lift === 'no') total *= 1.12;
+  total *= promoMultiplier;
+  return total;
 }
 
-nextButton.addEventListener('click', () => {
-  if (!validateCurrentStep()) return;
-  currentStep = Math.min(currentStep + 1, steps.length);
-  renderStep();
-});
-
-prevButton.addEventListener('click', () => {
-  formError.textContent = '';
-  currentStep = Math.max(currentStep - 1, 1);
-  renderStep();
-});
+function updateSummary() {
+  const total = calculateTotal();
+  summaryTotal.textContent = euro(total);
+  breakdown.innerHTML = `
+    <p>Articoli: <strong>${euro(getBaseItemsPrice())}</strong></p>
+    <p>Fattore locale: <strong>x${(locationFactor[locationSelect.value] || 1).toFixed(2)}</strong></p>
+    <p>Fattore quantità: <strong>x${(quantityFactor[Number(quantitySelect.value || 0)] || 1).toFixed(2)}</strong></p>
+    <p>Promo: <strong>x${promoMultiplier.toFixed(2)}</strong></p>
+  `;
+}
 
 locationSelect.addEventListener('change', refreshQuantityOptions);
+quoteForm.addEventListener('change', updateSummary);
+
+document.getElementById('custom-item').addEventListener('keydown', (event) => {
+  if (event.key !== 'Enter') return;
+  event.preventDefault();
+  const value = event.target.value.trim();
+  if (!value) return;
+  const id = `custom-${Date.now()}`;
+  selections.set(id, { id, label: value, icon: 'package', price: 55, qty: 1 });
+  event.target.value = '';
+  renderSelected();
+  updateSummary();
+});
+
+document.getElementById('apply-promo').addEventListener('click', () => {
+  const code = document.getElementById('promo-code').value.trim().toUpperCase();
+  promoMultiplier = code === 'TUTTO10' ? 0.9 : 1;
+  updateSummary();
+});
+
+document.getElementById('toggle-breakdown').addEventListener('click', () => {
+  breakdown.classList.toggle('hidden');
+});
 
 photosInput.addEventListener('change', () => {
   photoPreview.innerHTML = '';
@@ -80,36 +177,26 @@ photosInput.addEventListener('change', () => {
   });
 });
 
-form.addEventListener('submit', (event) => {
+quoteForm.addEventListener('submit', (event) => {
   event.preventDefault();
+  formError.textContent = '';
 
-  if (!form.checkValidity()) {
-    formError.textContent = 'Compila tutti i campi obbligatori prima di inviare.';
+  if (!selections.size) {
+    formError.textContent = 'Seleziona almeno un articolo da sgomberare.';
+    return;
+  }
+  if (!quoteForm.checkValidity()) {
+    formError.textContent = 'Compila tutti i campi obbligatori.';
     return;
   }
 
-  const formData = new FormData(form);
-  const materials = formData.getAll('materials');
-  if (!materials.length) {
-    formError.textContent = 'Seleziona almeno un materiale.';
-    return;
-  }
-
-  const location = formData.get('locationType');
-  const quantityIndex = Number(formData.get('quantityLevel'));
-  const floor = Number(formData.get('floor'));
-  const lift = formData.get('lift');
-
-  let estimate = basePrice[location] * quantityFactor[quantityIndex] * floorFactor[floor];
-  if (lift === 'no') estimate *= 1.12;
-  const avgMaterialBoost = materials.reduce((sum, material) => sum + (materialFactor[material] || 1), 0) / materials.length;
-  estimate *= avgMaterialBoost;
-
-  const min = Math.round(estimate * 0.9);
-  const max = Math.round(estimate * 1.18);
+  const total = calculateTotal();
+  const min = Math.round(total * 0.9);
+  const max = Math.round(total * 1.14);
+  const phone = quoteForm.elements.phone.value;
 
   result.classList.remove('hidden');
-  result.innerHTML = `<h3>Preventivo AI preliminare</h3><p><strong>Fascia stimata:</strong> €${min} - €${max} + IVA</p><p><strong>Foto caricate:</strong> ${photosInput.files.length}</p><p>Ti richiamiamo al <strong>${formData.get('phone')}</strong> per conferma operativa.</p>`;
+  result.innerHTML = `<h3>Preventivo AI preliminare</h3><p><strong>Fascia stimata:</strong> ${euro(min)} - ${euro(max)} + IVA</p><p><strong>Articoli:</strong> ${[...selections.values()].reduce((s, i) => s + i.qty, 0)} pezzi</p><p><strong>Foto caricate:</strong> ${photosInput.files.length}</p><p>Ti richiamiamo al <strong>${phone}</strong> per conferma finale.</p>`;
   result.scrollIntoView({ behavior: 'smooth', block: 'start' });
 });
 
@@ -117,7 +204,6 @@ function setupAddressAutocompleteFallback() {
   const addressInput = document.getElementById('address');
   const suggestions = document.getElementById('address-suggestions');
   let timer;
-
   addressInput.addEventListener('input', () => {
     clearTimeout(timer);
     const query = addressInput.value.trim();
@@ -134,7 +220,7 @@ function setupAddressAutocompleteFallback() {
           suggestions.appendChild(option);
         });
       } catch {
-        // input manuale resta disponibile
+        // input manuale sempre disponibile
       }
     }, 250);
   });
@@ -146,7 +232,6 @@ function setupGooglePlacesIfKeyPresent() {
     setupAddressAutocompleteFallback();
     return;
   }
-
   window.initGoogleAddress = function initGoogleAddress() {
     if (window.google?.maps?.places) {
       new google.maps.places.Autocomplete(document.getElementById('address'), { componentRestrictions: { country: 'it' } });
@@ -155,7 +240,6 @@ function setupGooglePlacesIfKeyPresent() {
       setupAddressAutocompleteFallback();
     }
   };
-
   const script = document.createElement('script');
   script.src = `https://maps.googleapis.com/maps/api/js?key=${key}&libraries=places&callback=initGoogleAddress`;
   script.async = true;
@@ -164,6 +248,9 @@ function setupGooglePlacesIfKeyPresent() {
   document.head.appendChild(script);
 }
 
-renderStep();
+renderCatalog();
+renderSelected();
 setupGooglePlacesIfKeyPresent();
+updateSummary();
 if (window.lucide) window.lucide.createIcons();
+window.addEventListener('load', () => window.lucide && window.lucide.createIcons());
